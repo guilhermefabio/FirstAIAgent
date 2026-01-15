@@ -1,0 +1,51 @@
+// app/data/rfqs/sample_rfq.json
+{
+  "buyer_profile": {
+    "company_name": "Burger in the Box",
+    "buyer_name": "Guilherme",
+    "region": "SC",
+    "language": "pt-BR",
+    "channels_allowed": ["whatsapp", "email"]
+  },
+  "demand": {
+    "rfq_id": "RFQ-2026-0001",
+    "deadline_quote": "2026-01-16",
+    "delivery_city": "Itajaí",
+    "items": [
+      {
+        "sku": "CARNE-ACEM",
+        "description": "Acém moído",
+        "quantity": 60,
+        "unit": "kg",
+        "quality_specs": "resfriado, padrão hambúrguer",
+        "max_unit_price": 28.0
+      }
+    ],
+    "must_have": ["nota fiscal", "entrega"],
+    "nice_to_have": ["pagamento 14 dias"]
+  },
+  "suppliers": [
+    {
+      "name": "Fornecedor A",
+      "priority": 1,
+      "known_contacts": {
+        "whatsapp": "+55XXXXXXXXXXX",
+        "url": "https://example.com"
+      },
+      "constraints": { "min_order_value": 500 }
+    }
+  ],
+  "negotiation_policy": {
+    "target_discount_percent": 6,
+    "max_discount_percent": 12,
+    "max_rounds": 3,
+    "payment_terms_preference": ["14d", "21d"],
+    "do_not_accept": ["pagamento antecipado total"],
+    "approval_required_over_total": 5000
+  },
+  "output": {
+    "format": "json",
+    "include_full_chat_log": true,
+    "rank_top_n": 5
+  }
+}

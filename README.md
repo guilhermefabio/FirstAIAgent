@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Guia rápido: como criar e entender um agente de IA
 
 Este repositório serve como um ponto de partida para **entender o funcionamento de um agente de IA** e o **processo de desenvolvimento**. Abaixo está um roteiro prático e direto para você criar o seu agente e compreender cada etapa.
@@ -64,3 +65,24 @@ Se quiser, posso ajudar você a:
 - montar um exemplo em Python;
 - integrar APIs específicas;
 - criar um agente com memória longa e ferramentas reais.
+=======
+# README.md
+
+## Setup
+pip install -e .
+playwright install chromium
+uvicorn app.main:app --reload
+
+## Test
+POST http://127.0.0.1:8000/api/run
+
+Body:
+{
+  "rfq": (conteúdo de app/data/rfqs/sample_rfq.json),
+  "dry_run": true,
+  "channel": "whatsapp"
+}
+
+Resultado em:
+app/data/runs/<run_id>.json
+>>>>>>> e784e71 (primeiro commit local)
