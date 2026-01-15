@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Guia rápido: como criar e entender um agente de IA
 
 Este repositório serve como um ponto de partida para **entender o funcionamento de um agente de IA** e o **processo de desenvolvimento**. Abaixo está um roteiro prático e direto para você criar o seu agente e compreender cada etapa.
@@ -85,4 +84,4 @@ Body:
 
 Resultado em:
 app/data/runs/<run_id>.json
->>>>>>> e784e71 (primeiro commit local)
+
