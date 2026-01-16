@@ -24,6 +24,7 @@ def run_agent(payload: RunRequest):
 
 @router.post("/chat/message", response_model=ChatResponse)
 def chat_message(payload: ChatRequest):
+    import traceback
     simulator = ChatSimulator()
     try:
         result = simulator.respond(
@@ -33,4 +34,6 @@ def chat_message(payload: ChatRequest):
         )
         return ChatResponse(reply=result["reply"], price_signals=result["price_signals"])
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        error_detail = f"{str(e)}\n{traceback.format_exc()}"
+        print(f"[ERROR] /api/chat/message: {error_detail}")
+        raise HTTPException(status_code=400, detail=error_detail)

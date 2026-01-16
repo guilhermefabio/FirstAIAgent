@@ -16,7 +16,13 @@ class ChatSimulator:
         return OllamaLLM()
 
     def respond(self, message: str, history: List[Dict[str, str]], product: str) -> Dict[str, Any]:
-        price_signals = fetch_price_signals(product)
+        # Buscar sinais de preço com fallback
+        try:
+            price_signals = fetch_price_signals(product)
+        except Exception as e:
+            print(f"[WARN] fetch_price_signals falhou para '{product}': {str(e)}")
+            price_signals = []
+
         system_prompt = self._build_system_prompt(product, price_signals)
 
         messages = [{"role": "system", "content": system_prompt}]
@@ -25,7 +31,14 @@ class ChatSimulator:
             messages.append({"role": role, "content": item.get("content", "")})
         messages.append({"role": "user", "content": message})
 
-        reply = self.llm.chat(messages, temperature=0.3)
+        # Chat com LLM com melhor tratamento de erro
+        try:
+            reply = self.llm.chat(messages, temperature=0.3)
+        except Exception as e:
+            error_msg = f"Erro na LLM ({settings.LLM_PROVIDER}): {str(e)}"
+            print(f"[ERROR] {error_msg}")
+            raise ValueError(error_msg) from e
+
         return {"reply": reply, "price_signals": price_signals}
 
     def _build_system_prompt(self, product: str, price_signals: List[Dict[str, str]]) -> str:

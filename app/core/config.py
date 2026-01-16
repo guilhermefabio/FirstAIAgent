@@ -2,12 +2,15 @@
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import os
+from pathlib import Path
 
-load_dotenv()
+# Carrega .env do diretório raiz do projeto
+env_path = Path(__file__).resolve().parent.parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
 
 class Settings(BaseModel):
     APP_NAME: str = os.getenv("APP_NAME", "buyer-agent")
-    LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
+    LOG_LEVEL: str = os.getenv("LOG_LEVEL", "DEBUG")
 
     LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "ollama")
 
